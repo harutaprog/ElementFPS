@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 44405327}
   - component: {fileID: 44405326}
   - component: {fileID: 44405331}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  Bullet: {fileID: 1022368980812103902, guid: 699195fa084263c44b155cb059557c84, type: 3}
 --- !u!1 &690812078
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BulletBase
+public class BulletBase
 {
+    //弾数
     public int BulletValue;
 
     //弾を撃つ処理

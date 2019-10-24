@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    struct bullet
+    {
+        public int ID;
+        public long value;
+    };
+
     [SerializeField]
     private float speed = 10.0f;
     private float cameraSpeed = 3.0f;
@@ -11,6 +17,8 @@ public class Player : MonoBehaviour
     private Transform CameraTransform;
     [SerializeField]
     private GameObject Bullet;
+
+    private List<bullet> Bulletlists = new List<bullet>();
 
     void Start()
     {

@@ -18,10 +18,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject Bullet;
 
-    private List<bullet> Bulletlists = new List<bullet>();
+    private List<bullet> Bulletlists = new List<bullet>() { new bullet {ID = 0, value = 0} };
+    private BulletTable bulletTable;
+    private List<BulletBase> bulletBases = new List<BulletBase>();
 
     void Start()
     {
+        bulletTable = Resources.Load<BulletTable>("BulletTable");
+        Debug.Log(bulletTable);
+        bulletBases = bulletTable.bulleBase;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -60,7 +65,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(Bullet, CameraTransform.position, CameraTransform.rotation);
+            //            Instantiate(Bullet, CameraTransform.position, CameraTransform.rotation);
+            bulletBases[0].Shot();
         }
     }
 }

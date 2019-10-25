@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBase
+public class BulletBase : MonoBehaviour
 {
-    //弾数
-    public int BulletValue;
-
     //弾を撃つ処理
     public virtual void Shot()
     {
@@ -16,7 +13,6 @@ public class BulletBase
     //弾丸を増やす処理
     public void BulletAdd()
     {
-
 
     }
 }

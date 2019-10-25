@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    struct bullet
-    {
-        public int ID;
-        public long value;
-    };
-
     [SerializeField]
     private float speed = 10.0f;
     private float cameraSpeed = 3.0f;
+    private int LoadBullet = 0;
     private Transform PlayerTransform;
     private Transform CameraTransform;
     [SerializeField]
     private GameObject Bullet;
-
-    private List<bullet> Bulletlists = new List<bullet>() { new bullet {ID = 0, value = 0} };
+    
+    [SerializeField]
     private BulletTable bulletTable;
     private List<BulletBase> bulletBases = new List<BulletBase>();
 
     void Start()
     {
-        bulletTable = Resources.Load<BulletTable>("BulletTable");
+
         Debug.Log(bulletTable);
         bulletBases = bulletTable.bulleBase;
         Cursor.visible = false;
@@ -63,10 +58,34 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            LoadBullet--;
+            if(0 > LoadBullet)
+            {
+                LoadBullet = Bulletlists.Count - 1;
+            }
+            Debug.Log(LoadBullet);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            LoadBullet++;
+            if(Bulletlists.Count <= LoadBullet)
+            {
+                LoadBullet = 0;
+            }
+            Debug.Log(LoadBullet);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            //            Instantiate(Bullet, CameraTransform.position, CameraTransform.rotation);
-            bulletBases[0].Shot();
+            if (Bulletlists[LoadBullet].value > 0)
+            {
+                Bulletlists[LoadBullet].value - 1;
+                Instantiate(bulletBases[Bulletlists[LoadBullet].ID], CameraTransform.position, CameraTransform.rotation);
+            }
+//            bulletBases[0].Shot();
         }
     }
 }

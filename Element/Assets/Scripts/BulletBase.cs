@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
+    private int waitTime;
+    private int Ammunation;
+
     //弾を撃つ処理
     public virtual void Shot()
     {

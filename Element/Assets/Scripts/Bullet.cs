@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : BulletBase
 {
-    [SerializeField]
-    private float speed = 10.0f;
+    private float speed = 1500.0f;
 
     private Rigidbody rigidbody;
 

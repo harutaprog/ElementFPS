@@ -8,10 +8,10 @@ public class Player : MonoBehaviour
     private float speed = 10.0f;
     private float cameraSpeed = 3.0f;
     private int LoadBullet = 0;
+    [SerializeField]
+    private bool ShotWait = false;
     private Transform PlayerTransform;
     private Transform CameraTransform;
-    [SerializeField]
-    private GameObject Bullet;
     
     [SerializeField]
     private BulletTable bulletTable;
@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
         Debug.Log(bulletTable);
         bulletBases = bulletTable.bulleBase;
         Cursor.visible = false;
@@ -43,6 +42,9 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0)
             PlayerTransform.transform.position -= dir2 * Input.GetAxis("Horizontal") *speed * Time.deltaTime;
 
+        //--------------------------------
+        //ダッシュ機能
+        //--------------------------------
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed = 20.0f;
@@ -52,40 +54,59 @@ public class Player : MonoBehaviour
             speed = 10.0f;
         }
 
+        //--------------------------------
+        //メニュー機能(？)
+        //--------------------------------
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
 
+        //--------------------------------
+        //弾丸切り替え機能
+        //--------------------------------
         if (Input.GetKeyDown(KeyCode.Z))
         {
             LoadBullet--;
             if(0 > LoadBullet)
             {
-                LoadBullet = Bulletlists.Count - 1;
+                LoadBullet = bulletBases.Count - 1;
             }
             Debug.Log(LoadBullet);
         }
-
         else if (Input.GetKeyDown(KeyCode.X))
         {
             LoadBullet++;
-            if(Bulletlists.Count <= LoadBullet)
+            if(bulletBases.Count <= LoadBullet)
             {
                 LoadBullet = 0;
             }
             Debug.Log(LoadBullet);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        //--------------------------------
+        //弾丸打ち出し
+        //--------------------------------
+        if (Input.GetMouseButton(0) && ShotWait == false)
         {
-            if (Bulletlists[LoadBullet].value > 0)
+//          if (bulletBases[LoadBullet].Amm_Check() > 0){
+            bulletBases[LoadBullet].Shot(CameraTransform.position, CameraTransform.rotation);
+            if (bulletBases[LoadBullet].WaitTime_Check() > 0)
             {
-                Bulletlists[LoadBullet].value - 1;
-                Instantiate(bulletBases[Bulletlists[LoadBullet].ID], CameraTransform.position, CameraTransform.rotation);
+                ShotWait = true;
+                StartCoroutine(BulletWait());
             }
-//            bulletBases[0].Shot();
+//            }
         }
+    }
+
+    //--------------------------------
+    //射撃の待機時間の処理
+    //--------------------------------
+    IEnumerator BulletWait()
+    {
+        yield return new WaitForSeconds(bulletBases[LoadBullet].WaitTime_Check());
+        if (ShotWait == true) ShotWait = false;
     }
 }

@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class Bullet : BulletBase
 {
-    private float speed = 1500.0f;
-
-    private Rigidbody rigidbody;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
+    //弾丸の挙動を設定
     void FixedUpdate()
     {
         rigidbody.velocity = transform.forward * speed * Time.deltaTime;
+    }
+
+    public override void Shot(Vector3 vector3, Quaternion quaternion)
+    {
+        Instantiate(gameObject, vector3, quaternion);
     }
 }

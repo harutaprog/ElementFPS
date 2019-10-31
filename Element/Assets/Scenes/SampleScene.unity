@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  Bullet: {fileID: 1022368980812103902, guid: 699195fa084263c44b155cb059557c84, type: 3}
+  ShotWait: 0
   bulletTable: {fileID: 11400000, guid: aabe325a7a9df8b4ab980f9dff641670, type: 2}
 --- !u!1 &690812078
 GameObject:

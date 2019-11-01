@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
+    //弾丸を撃てない時間(ウェイトタイム)
     [SerializeField]
     protected float waitTime;
+    //弾の速度
     [SerializeField]
     protected float speed;
+    //残弾数
     private int Ammunation;
+    //弾が消滅するまでの時間
     [SerializeField]
     private float deleteTime;
     protected Rigidbody rigidbody;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         Destroy(gameObject, deleteTime);
@@ -38,9 +42,15 @@ public class BulletBase : MonoBehaviour
         return Ammunation;
     }
 
-    //ウェイトタイムを返す処理
+    //弾丸を撃てない時間(ウェイトタイム)を返す処理
     public float WaitTime_Check()
     {
         return waitTime;
+    }
+
+    //命中した時の処理(後で処理を書いてもよし)
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }

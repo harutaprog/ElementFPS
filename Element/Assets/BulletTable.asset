@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletTable
   m_EditorClassIdentifier: 
   bulleBase:
-  - {fileID: 3899397870843742522, guid: 719dd3b03bf476b4cb26682723e2ac7f, type: 3}
+  - {fileID: 4240339397995359405, guid: 7656d5b800f6f8f4ab2ace7c8b3a6f53, type: 3}
   - {fileID: 3726859088617436707, guid: 699195fa084263c44b155cb059557c84, type: 3}
   - {fileID: 3899397870843742522, guid: 719dd3b03bf476b4cb26682723e2ac7f, type: 3}
   - {fileID: 3726859088617436707, guid: 699195fa084263c44b155cb059557c84, type: 3}

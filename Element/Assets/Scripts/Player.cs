@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private bool ShotWait = false;
     private Transform PlayerTransform;
     private Transform CameraTransform;
+    [SerializeField]
+    private GameObject ShotPoint;
     
     [SerializeField]
     private BulletTable bulletTable;
@@ -30,6 +32,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //--------------------------------
+        //視点移動&キャラクター移動
+        //--------------------------------
         PlayerTransform.Rotate(0, Input.GetAxis("Mouse X") * cameraSpeed, 0);
         CameraTransform.Rotate(-Input.GetAxis("Mouse Y") * cameraSpeed, 0, 0);
 
@@ -61,6 +66,7 @@ public class Player : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
         }
 
         //--------------------------------
@@ -68,6 +74,7 @@ public class Player : MonoBehaviour
         //--------------------------------
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            ShotWait = false;
             LoadBullet--;
             if(0 > LoadBullet)
             {
@@ -77,6 +84,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
+            ShotWait = false;
             LoadBullet++;
             if(bulletBases.Count <= LoadBullet)
             {
@@ -91,7 +99,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && ShotWait == false)
         {
 //          if (bulletBases[LoadBullet].Amm_Check() > 0){
-            bulletBases[LoadBullet].Shot(CameraTransform.position, CameraTransform.rotation);
+            bulletBases[LoadBullet].Shot(/*CameraTransform.position*/ShotPoint.transform.position, CameraTransform.rotation);
             if (bulletBases[LoadBullet].WaitTime_Check() > 0)
             {
                 ShotWait = true;

@@ -978,22 +978,22 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.09586525
-          inSlope: 2.5286987
-          outSlope: 2.5286987
+          value: 0.24452046
+          inSlope: 0.5185757
+          outSlope: 0.5185757
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.03151515
+          outWeight: 0.101425804
         - serializedVersion: 3
-          time: 0.79787236
+          time: 0.89037114
           value: 1
           inSlope: 1
           outSlope: 1
@@ -4797,6 +4797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fafcfdbed43ef14a9c0c682925ac7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.05
-  speed: 500
-  deleteTime: 2
+  waitTime: 0.01
+  speed: 1500
+  deleteTime: 1
+  SlowSpeed: 20

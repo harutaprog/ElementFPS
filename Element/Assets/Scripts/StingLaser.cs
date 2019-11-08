@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotGunBullet : BulletBase
+public class StingLaser : BulletBase
 {
     [SerializeField]
     private int ShotAmm;
@@ -21,8 +21,7 @@ public class ShotGunBullet : BulletBase
         Vector3 vec = quaternion.eulerAngles;
         for (int i = 0; i < ShotAmm; i++)
         {
-            //ここでQuaternionに戻す
-            Instantiate(gameObject, vector3, Quaternion.Euler(vec.x + Random.Range(-15,15), vec.y + Random.Range(-15, 15), vec.z));
+            Instantiate(gameObject, vector3, Quaternion.Euler(vec.x + Random.Range(-45, 45), vec.y + Random.Range(-45, 45), vec.z));
         }
     }
 }

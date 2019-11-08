@@ -30,6 +30,7 @@ public class FireBullet : BulletBase
 
     public override void Shot(Vector3 vector3, Quaternion quaternion)
     {
+        Ammunation--;
         Instantiate(gameObject, vector3, quaternion);
     }
 }

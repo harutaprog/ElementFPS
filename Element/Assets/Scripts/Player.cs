@@ -30,6 +30,11 @@ public class Player : MonoBehaviour
 
         PlayerTransform = gameObject.transform;
         CameraTransform = GameObject.FindGameObjectWithTag("MainCamera"). GetComponent<Transform>();
+
+        for(int a = 0; a < bulletBases.Count; a++)
+        {
+            bulletBases[a].Amm_Set(500);
+        }
     }
 
     void Update()
@@ -76,23 +81,26 @@ public class Player : MonoBehaviour
         //--------------------------------
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            ShotWait = false;
+            ShotWait = true;
             LoadBullet--;
             if(0 > LoadBullet)
             {
                 LoadBullet = bulletBases.Count - 1;
             }
             Debug.Log(LoadBullet);
+            StartCoroutine(BulletWait(1.0f));
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            ShotWait = false;
+            ShotWait = true;
             LoadBullet++;
             if(bulletBases.Count <= LoadBullet)
             {
                 LoadBullet = 0;
             }
             Debug.Log(LoadBullet);
+            StartCoroutine(BulletWait(1.0f));
+
         }
 
         //--------------------------------
@@ -100,14 +108,19 @@ public class Player : MonoBehaviour
         //--------------------------------
         if (Input.GetMouseButton(0) && ShotWait == false)
         {
-//          if (bulletBases[LoadBullet].Amm_Check() > 0){
-            bulletBases[LoadBullet].Shot(ShotPoint.transform.position, CameraTransform.rotation);
-            if (bulletBases[LoadBullet].WaitTime_Check() > 0)
+            if (bulletBases[LoadBullet].Amm_Get() > 0)
             {
-                ShotWait = true;
-                StartCoroutine(BulletWait(bulletBases[LoadBullet].WaitTime_Check()));
+                bulletBases[LoadBullet].Shot(ShotPoint.transform.position, CameraTransform.rotation);
+                if (bulletBases[LoadBullet].WaitTime_Check() > 0)
+                {
+                    ShotWait = true;
+                    StartCoroutine(BulletWait(bulletBases[LoadBullet].WaitTime_Check()));
+                }
             }
-//            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            bulletBases[LoadBullet].ShotEnd(ShotPoint.transform.position, CameraTransform.rotation);
         }
     }
 
@@ -117,6 +130,6 @@ public class Player : MonoBehaviour
     IEnumerator BulletWait(float waittime)
     {
         yield return new WaitForSeconds(waittime);
-        if (ShotWait == true) ShotWait = false;
+        ShotWait = false;
     }
 }

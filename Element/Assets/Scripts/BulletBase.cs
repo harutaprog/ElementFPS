@@ -11,7 +11,7 @@ public class BulletBase : MonoBehaviour
     [SerializeField]
     protected float speed;
     //残弾数
-    private int Ammunation;
+    protected int Ammunation;
     //弾が消滅するまでの時間
     [SerializeField]
     private float deleteTime;
@@ -26,6 +26,12 @@ public class BulletBase : MonoBehaviour
 
     //弾を撃つ処理(継承先で処理を書く)
     public virtual void Shot(Vector3 vector3,Quaternion quaternion)
+    {
+
+    }
+
+    //弾丸を撃った後の処理(マウスのキーを離した時)
+    public virtual void ShotEnd(Vector3 vector3, Quaternion quaternion)
     {
 
     }

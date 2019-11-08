@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9c951709a4a6641ad2b64da62dd704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.1
+  waitTime: 1
   speed: 2000
   deleteTime: 0.5
-  ShotAmm: 30
+  ShotAmm: 40

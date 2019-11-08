@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float speed = 10.0f;
     private float cameraSpeed = 3.0f;
+    //現在撃てる弾(Listのどこを指しているか)
     private int LoadBullet = 0;
+    //現在弾が撃てるかどうか
     [SerializeField]
     private bool ShotWait = false;
     private Transform PlayerTransform;
@@ -99,11 +101,11 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && ShotWait == false)
         {
 //          if (bulletBases[LoadBullet].Amm_Check() > 0){
-            bulletBases[LoadBullet].Shot(/*CameraTransform.position*/ShotPoint.transform.position, CameraTransform.rotation);
+            bulletBases[LoadBullet].Shot(ShotPoint.transform.position, CameraTransform.rotation);
             if (bulletBases[LoadBullet].WaitTime_Check() > 0)
             {
                 ShotWait = true;
-                StartCoroutine(BulletWait());
+                StartCoroutine(BulletWait(bulletBases[LoadBullet].WaitTime_Check()));
             }
 //            }
         }
@@ -112,9 +114,9 @@ public class Player : MonoBehaviour
     //--------------------------------
     //射撃の待機時間の処理
     //--------------------------------
-    IEnumerator BulletWait()
+    IEnumerator BulletWait(float waittime)
     {
-        yield return new WaitForSeconds(bulletBases[LoadBullet].WaitTime_Check());
+        yield return new WaitForSeconds(waittime);
         if (ShotWait == true) ShotWait = false;
     }
 }

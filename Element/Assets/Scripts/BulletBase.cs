@@ -37,9 +37,15 @@ public class BulletBase : MonoBehaviour
     }
 
     //弾丸の数を返す処理
-    public int Amm_Check()
+    public int Amm_Get()
     {
         return Ammunation;
+    }
+
+    //弾丸の数を設定する処理
+    public void Amm_Set(int amm)
+    {
+        Ammunation = amm;
     }
 
     //弾丸を撃てない時間(ウェイトタイム)を返す処理

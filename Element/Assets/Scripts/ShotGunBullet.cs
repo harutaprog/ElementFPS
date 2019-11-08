@@ -15,9 +15,15 @@ public class ShotGunBullet : BulletBase
 
     public override void Shot(Vector3 vector3, Quaternion quaternion)
     {
+        Debug.Log(quaternion.x + "," + quaternion.y + "," + quaternion.z);
+        Debug.Log(Quaternion.Euler(quaternion.x + Random.Range(-5, 5), quaternion.y + Random.Range(-5, 5), quaternion.z));
+
+        //Quaternionでは変換が難しいためVector3に一時的に変換
+        Vector3 vec = quaternion.eulerAngles;
         for (int i = 0; i < ShotAmm; i++)
         {
-            Instantiate(gameObject, vector3, new Quaternion(quaternion.x + Random.Range(-0.3f,0.3f), quaternion.y + Random.Range(-0.3f, 0.3f), quaternion.z, quaternion.w));
+            //ここでQuaternionに戻す
+            Instantiate(gameObject, vector3, Quaternion.Euler(vec.x + Random.Range(-5,5), vec.y + Random.Range(-5, 5), vec.z));
         }
     }
 }
